@@ -28,3 +28,34 @@ body {
 .nav-link{
     color: var(--primary-color);
 }
+.shadow-effect{
+    border: none;
+    box-shadow: 0px 0px 33px -10px rgb(71,114,254,0.3);
+}
+
+.bg-theme{
+    background-color: var(--primary-color);
+}
+
+.bg-secondary-theme{
+    background-color: var(--secondary-color);
+
+}
+
+.text-theme-primary{
+    color: var(--primary-color);
+}
+
+input[type="text"],  input[type="email"]{
+    height: 50px;
+    padding-left: 20px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.btn-theme{
+    height: 48px;
+    border: none;
+    font-size: 12px;
+    background-color: var(--primary-color);
+}
