@@ -7,9 +7,9 @@ import { Component, Input } from '@angular/core';
 })
 export class PostCardComponent {
 
-  @Input() fpostData : any;
+  @Input() postData : any;
 
   ngOnInit(){
-    console.log(this.fpostData);
+    console.log(this.postData);
   }
 }

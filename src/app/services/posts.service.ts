@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { collection, collectionData, Firestore, getDocs, query, where } from '@angular/fire/firestore';
+import { collection, collectionData, doc, docData, Firestore, getDocs, limit, orderBy, query, where } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ export class PostsService {
 
   async loadFeatured(){
     const postCollection = collection(this.firestore, 'posts');
-    const q = query(postCollection, where("isFeatured", "==", true));
+    const q = query(postCollection, where("isFeatured", "==", true), limit(4));
     const querySnapshot = await getDocs(q);
 
     // Extract data
@@ -19,5 +19,37 @@ export class PostsService {
       fPosts.push({ id: doc.id, ...doc.data() });
     });
     return fPosts;
+  }
+
+  async loadLatest(){
+    const postCollection = collection(this.firestore, 'posts');
+    const q = query(postCollection, orderBy("createdAt", "desc"));
+    const querySnapshot = await getDocs(q);
+
+    // Extract data
+    const lPosts: any[] = [];
+    querySnapshot.forEach((doc) => {
+      lPosts.push({ id: doc.id, ...doc.data() });
+    });
+    return lPosts;
+  }
+
+  async loadCategoryPosts(categoryId: any){
+    const postCollection = collection(this.firestore, 'posts');
+    const q = query(postCollection,  where("category.categoryId", "==", categoryId));
+    const querySnapshot = await getDocs(q);
+
+    // Extract data
+    const cPosts: any[] = [];
+    querySnapshot.forEach((doc) => {
+      cPosts.push({ id: doc.id, ...doc.data() });
+    });
+    return cPosts;
+  }
+
+
+  loadOnePost(postId:any){
+    const docRef = doc(this.firestore, `posts/${postId}`);
+    return docData(docRef);
   }
 }

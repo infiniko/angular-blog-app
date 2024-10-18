@@ -8,10 +8,16 @@ import { PostsService } from '../../services/posts.service';
 })
 export class HomeComponent {
   featuredPostArray: Array<any>;
-
+  latestPostArray: Array<any>;
   constructor(private postService: PostsService){
+    
+  } 
+  ngOnInit(){
     this.postService.loadFeatured().then( (val:any) => {
       this.featuredPostArray = val;
     })
-  }  
+    this.postService.loadLatest().then( (val) => {
+      this.latestPostArray = val;
+    })
+  } 
 }

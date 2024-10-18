@@ -1,16 +1,16 @@
-<div class="container">
+<div class="container" >
     <div class="row">
         <div class="col-md-9">
             <div class="card shadow-effect">
-                <img src="https://images.pexels.com/photos/3075993/pexels-photo-3075993.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                <img src="{{postResponse.postImgPath}}"
                     class="card-img-top img-fluid" alt="">
                 <div class="card-body">
-                    <small class="bg-light text-danger text-center ms-2">Design</small>
+                    <small class="bg-light text-danger text-center ms-2">{{postResponse.category.category}}</small>
                     <small class="bg-light text-success text-center ms-2">Featured</small>
-                    <small class="bg-light text-info text-center ms-2">Views - 1221</small>
-                    <small class="bg-light text-warning text-center ms-2">LAST UPDATED - SEP 22 2024</small>
+                    <small class="bg-light text-info text-center ms-2">Views - {{postResponse.views}}</small>
+                    <small class="bg-light text-warning text-center ms-2">LAST UPDATED - {{postResponse.createdAt.toMillis() | date: 'MMM dd, yyyy'}}</small>
 
-                    <h1 class="my-3">Exploring nightcity</h1>
+                    <h1 class="my-3">{{postResponse.title}}</h1>
                     <p>
 
                         A night city exudes a mesmerizing beauty, transforming into a canvas of lights and reflections.
