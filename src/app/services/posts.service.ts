@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { collection, collectionData, doc, docData, Firestore, getDocs, limit, orderBy, query, where } from '@angular/fire/firestore';
+import { collection, collectionData, doc, docData, Firestore, getDocs, increment, limit, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
@@ -47,9 +47,30 @@ export class PostsService {
     return cPosts;
   }
 
-
   loadOnePost(postId:any){
     const docRef = doc(this.firestore, `posts/${postId}`);
     return docData(docRef);
+  }
+
+  async loadSimilar(categoryId:any){
+    const postCollection = collection(this.firestore, 'posts');
+    const q = query(postCollection,  where("category.categoryId", "==", categoryId), limit(4));
+    const querySnapshot = await getDocs(q);
+
+    // Extract data
+    const cPosts: any[] = [];
+    querySnapshot.forEach((doc) => {
+      cPosts.push({ id: doc.id, ...doc.data() });
+    });
+    return cPosts;
+  }
+
+  updateViews(id:any){
+    const docRef = doc(this.firestore, `posts/${id}`);
+    updateDoc(docRef,{
+      views: increment(1)
+    }).then( docRef => {
+      console.log('updated views');
+    });
   }
 }
