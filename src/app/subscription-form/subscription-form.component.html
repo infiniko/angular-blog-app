@@ -4,12 +4,15 @@
             <h3>SUBSCRIPTION FORM</h3>
             <p class="m-auto subs-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
 
-            <form action="" class="row g-4 mt-1">
+            <form class="row g-4 mt-1" #subForm="ngForm">
                 <div class="form-group col-md-5">
-                    <input type="text" class="form-control shadow-effect" placeholder="Name">
+                    <input type="text" class="form-control shadow-effect" placeholder="Name" name="name" #Name="ngModel" ngModel required>
+                    <div class="text-danger" *ngIf="Name.touched && Name.invalid">
+                        <div>Name is required</div>
+                    </div>
                 </div>
                 <div class="form-group col-md-5">
-                    <input type="email" class="form-control shadow-effect" placeholder="E-mail">
+                    <input type="email" class="form-control shadow-effect" placeholder="E-mail" name="email" #Email="ngModel" ngModel required email>
                 </div>
                 <div class="col-md-2">
                     <button class="btn btn-info btn-block btn-theme text-white px-5">SUBSCRIBE</button>
