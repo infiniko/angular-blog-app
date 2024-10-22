@@ -10,6 +10,6 @@ export class PostCardComponent {
   @Input() postData : any;
 
   ngOnInit(){
-    console.log(this.postData);
+    
   }
 }
