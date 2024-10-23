@@ -4,7 +4,9 @@
             <h3>SUBSCRIPTION FORM</h3>
             <p class="m-auto subs-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
 
-            <form class="row g-4 mt-1" #subForm="ngForm" (ngSubmit)="onSubmit(subForm.value)">
+            <div class="alert alert-danger mt-3" *ngIf="isEmailUsed">Email already in use</div>
+            <div class="alert alert-success mt-3" *ngIf="isSubscribed">Thanks for subscribing!!</div>
+            <form class="row g-4 mt-1" #subForm="ngForm" (ngSubmit)="onSubmit(subForm.value)" *ngIf="!isSubscribed">
                 <div class="form-group col-md-5">
                     <input type="text" class="form-control" placeholder="Name" name="name" #Name="ngModel" ngModel required [ngClass]="{'is-invalid': Name.touched && Name.invalid}">
                     <div class="text-danger" *ngIf="Name.touched && Name.invalid">
